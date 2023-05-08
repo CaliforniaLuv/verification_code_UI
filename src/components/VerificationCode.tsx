@@ -1,4 +1,4 @@
-import { useState, useRef, KeyboardEvent } from "react";
+import { useState, useRef } from "react";
 
 export const VerificationCode = () => {
   const [code1, setCode1] = useState("");
@@ -7,38 +7,65 @@ export const VerificationCode = () => {
   const [code4, setCode4] = useState("");
   const [code5, setCode5] = useState("");
   const [code6, setCode6] = useState("");
-  const input1 = useRef(null);
-  const input2 = useRef(null);
-  const input3 = useRef(null);
-  const input4 = useRef(null);
-  const input5 = useRef(null);
-  const input6 = useRef(null);
+  const [empty, setEmpty] = useState(false);
 
   const formInput = (e: any) => {
-    // const input = e.target;
-    const input = e;
+    const input = e.target;
+    const nextInput = input.nextElementSibling;
 
-    console.log(e);
-
-    // console.log(input.nextElementSibling);
+    if (nextInput && input.value) {
+      nextInput.focus();
+      if (nextInput.value) {
+        nextInput.select();
+      }
+    }
   };
 
   const handleSum = () => {
-    console.log(code1 + code2 + code3 + code4 + code5 + code6);
+    if (
+      code1 !== "" &&
+      code2 !== "" &&
+      code3 !== "" &&
+      code4 !== "" &&
+      code5 !== "" &&
+      code6 !== ""
+    ) {
+      console.log("합격");
+      setEmpty(false);
+    } else {
+      console.log("불합격");
+      setEmpty(true);
+    }
   };
 
-  function handleBackspace(e: KeyboardEvent<HTMLInputElement>) {
-    // console.log(e);
+  function handleBackspace(e: any, func: (value: string) => void) {
+    const input = e.target;
+
+    if (input.value || input.id === "input1") {
+      input.value = "";
+      func("");
+      return;
+    }
+
+    input.previousElementSibling.focus();
   }
 
-  function handleArrowLeft(e: KeyboardEvent<HTMLInputElement>) {}
+  function handleArrowLeft(e: any) {
+    const previousInput = e.target.previousElementSibling;
+    if (!previousInput) return;
+    previousInput.focus();
+  }
 
-  function handleArrowRight(e: KeyboardEvent<HTMLInputElement>) {}
+  function handleArrowRight(e: any) {
+    const nextInput = e.target.nextElementSibling;
+    if (!nextInput) return;
+    nextInput.focus();
+  }
 
-  const handleTyping = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleTyping = (e: any, func: (value: string) => void) => {
     switch (e.keyCode) {
       case KEYBOARDS.backspace:
-        handleBackspace(e);
+        handleBackspace(e, func);
         break;
       case KEYBOARDS.arrowLeft:
         handleArrowLeft(e);
@@ -51,65 +78,106 @@ export const VerificationCode = () => {
   };
 
   return (
-    <form onInput={(e: any) => formInput(e)}>
+    <form onInput={(e) => formInput(e)} onSubmit={(e) => e.preventDefault()}>
       <div className="flex gap-x-[10px]">
         <input
-          className="w-[50px] h-[50px] px-[16px] border-[2px] rounded-lg border-orange-300 text-[25px]"
-          value={code1}
+          id={"input1"}
+          type="tel"
+          className={`w-[50px] h-[50px] px-[16px] border-[2px] rounded-lg ${
+            empty ? "border-red-500" : "border-orange-300"
+          }  text-[25px]`}
           maxLength={1}
-          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
-            handleTyping(e)
-          }
-          //   onInput={(e: React.FormEvent<HTMLInputElement>) => handleInput(e)}
-          ref={input1}
+          onFocus={(e) => {
+            setTimeout(() => {
+              e.target.select();
+            }, 0);
+          }}
+          onKeyDown={(e: any) => handleTyping(e, setCode1)}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setCode1(e.target.value)
           }
         />
         <input
-          className="w-[50px] h-[50px] px-[16px] border-[2px] rounded-lg border-orange-300 text-[25px]"
-          value={code2}
+          id={"input2"}
+          type="tel"
+          className={`w-[50px] h-[50px] px-[16px] border-[2px] rounded-lg ${
+            empty ? "border-red-500" : "border-orange-300"
+          }  text-[25px]`}
           maxLength={1}
-          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
-            handleTyping(e)
-          }
-          ref={input2}
+          onFocus={(e) => {
+            setTimeout(() => {
+              e.target.select();
+            }, 0);
+          }}
+          onKeyDown={(e: any) => handleTyping(e, setCode2)}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setCode2(e.target.value)
           }
         />
         <input
-          className="w-[50px] h-[50px] px-[16px] border-[2px] rounded-lg border-orange-300 text-[25px]"
-          value={code3}
+          id={"input3"}
+          type="tel"
+          className={`w-[50px] h-[50px] px-[16px] border-[2px] rounded-lg ${
+            empty ? "border-red-500" : "border-orange-300"
+          }  text-[25px]`}
           maxLength={1}
-          ref={input3}
+          onFocus={(e) => {
+            setTimeout(() => {
+              e.target.select();
+            }, 0);
+          }}
+          onKeyDown={(e: any) => handleTyping(e, setCode3)}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setCode3(e.target.value)
           }
         />
         <input
-          className="w-[50px] h-[50px] px-[16px] border-[2px] rounded-lg border-orange-300 text-[25px]"
-          value={code4}
+          id={"input4"}
+          type="tel"
+          className={`w-[50px] h-[50px] px-[16px] border-[2px] rounded-lg ${
+            empty ? "border-red-500" : "border-orange-300"
+          }  text-[25px]`}
           maxLength={1}
-          ref={input4}
+          onFocus={(e) => {
+            setTimeout(() => {
+              e.target.select();
+            }, 0);
+          }}
+          onKeyDown={(e: any) => handleTyping(e, setCode4)}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setCode4(e.target.value)
           }
         />
         <input
-          className="w-[50px] h-[50px] px-[16px] border-[2px] rounded-lg border-orange-300 text-[25px]"
-          value={code5}
+          id={"input5"}
+          type="tel"
+          className={`w-[50px] h-[50px] px-[16px] border-[2px] rounded-lg ${
+            empty ? "border-red-500" : "border-orange-300"
+          }  text-[25px]`}
           maxLength={1}
-          ref={input5}
+          onFocus={(e) => {
+            setTimeout(() => {
+              e.target.select();
+            }, 0);
+          }}
+          onKeyDown={(e: any) => handleTyping(e, setCode5)}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setCode5(e.target.value)
           }
         />
         <input
-          className="w-[50px] h-[50px] px-[16px] border-[2px] rounded-lg border-orange-300 text-[25px]"
-          value={code6}
+          id={"input6"}
+          type="tel"
+          className={`w-[50px] h-[50px] px-[16px] border-[2px] rounded-lg ${
+            empty ? "border-red-500" : "border-orange-300"
+          }  text-[25px]`}
           maxLength={1}
-          ref={input6}
+          onFocus={(e) => {
+            setTimeout(() => {
+              e.target.select();
+            }, 0);
+          }}
+          onKeyDown={(e: any) => handleTyping(e, setCode6)}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setCode6(e.target.value)
           }
