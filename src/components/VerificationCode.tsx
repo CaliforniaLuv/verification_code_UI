@@ -84,8 +84,10 @@ export const VerificationCode = () => {
           id={"input1"}
           type="tel"
           className={`w-[50px] h-[50px] px-[16px] border-[2px] rounded-lg ${
-            empty ? "border-red-500" : "border-orange-300"
-          }  text-[25px] duration-100 outline-none focus:shadow-[0_0px_15px_rgba(253,_186,_116,_0.8)]`}
+            empty
+              ? "border-red-500 focus:shadow-[0_0px_15px_rgba(239,_68,_68,_0.8)]"
+              : "border-orange-300 focus:shadow-[0_0px_15px_rgba(253,_186,_116,_0.8)]"
+          }  text-[25px] duration-100 outline-none`}
           maxLength={1}
           onFocus={(e) => {
             setTimeout(() => {
@@ -101,8 +103,10 @@ export const VerificationCode = () => {
           id={"input2"}
           type="tel"
           className={`w-[50px] h-[50px] px-[16px] border-[2px] rounded-lg ${
-            empty ? "border-red-500" : "border-orange-300"
-          }  text-[25px] duration-100 outline-none focus:shadow-[0_0px_15px_rgba(253,_186,_116,_0.8)]`}
+            empty
+              ? "border-red-500 focus:shadow-[0_0px_15px_rgba(239,_68,_68,_0.8)]"
+              : "border-orange-300 focus:shadow-[0_0px_15px_rgba(253,_186,_116,_0.8)]"
+          }  text-[25px] duration-100 outline-none`}
           maxLength={1}
           onFocus={(e) => {
             setTimeout(() => {
@@ -118,8 +122,10 @@ export const VerificationCode = () => {
           id={"input3"}
           type="tel"
           className={`w-[50px] h-[50px] px-[16px] border-[2px] rounded-lg ${
-            empty ? "border-red-500" : "border-orange-300"
-          }  text-[25px] duration-100 outline-none focus:shadow-[0_0px_15px_rgba(253,_186,_116,_0.8)]`}
+            empty
+              ? "border-red-500 focus:shadow-[0_0px_15px_rgba(239,_68,_68,_0.8)]"
+              : "border-orange-300 focus:shadow-[0_0px_15px_rgba(253,_186,_116,_0.8)]"
+          }  text-[25px] duration-100 outline-none`}
           maxLength={1}
           onFocus={(e) => {
             setTimeout(() => {
@@ -135,8 +141,10 @@ export const VerificationCode = () => {
           id={"input4"}
           type="tel"
           className={`w-[50px] h-[50px] px-[16px] border-[2px] rounded-lg ${
-            empty ? "border-red-500" : "border-orange-300"
-          }  text-[25px] duration-100 outline-none focus:shadow-[0_0px_15px_rgba(253,_186,_116,_0.8)]`}
+            empty
+              ? "border-red-500 focus:shadow-[0_0px_15px_rgba(239,_68,_68,_0.8)]"
+              : "border-orange-300 focus:shadow-[0_0px_15px_rgba(253,_186,_116,_0.8)]"
+          }  text-[25px] duration-100 outline-none`}
           maxLength={1}
           onFocus={(e) => {
             setTimeout(() => {
@@ -152,8 +160,10 @@ export const VerificationCode = () => {
           id={"input5"}
           type="tel"
           className={`w-[50px] h-[50px] px-[16px] border-[2px] rounded-lg ${
-            empty ? "border-red-500" : "border-orange-300"
-          }  text-[25px] duration-100 outline-none focus:shadow-[0_0px_15px_rgba(253,_186,_116,_0.8)]`}
+            empty
+              ? "border-red-500 focus:shadow-[0_0px_15px_rgba(239,_68,_68,_0.8)]"
+              : "border-orange-300 focus:shadow-[0_0px_15px_rgba(253,_186,_116,_0.8)]"
+          }  text-[25px] duration-100 outline-none`}
           maxLength={1}
           onFocus={(e) => {
             setTimeout(() => {
@@ -169,8 +179,10 @@ export const VerificationCode = () => {
           id={"input6"}
           type="tel"
           className={`w-[50px] h-[50px] px-[16px] border-[2px] rounded-lg ${
-            empty ? "border-red-500" : "border-orange-300"
-          }  text-[25px] duration-100 outline-none focus:shadow-[0_0px_15px_rgba(253,_186,_116,_0.8)]`}
+            empty
+              ? "border-red-500 focus:shadow-[0_0px_15px_rgba(239,_68,_68,_0.8)]"
+              : "border-orange-300 focus:shadow-[0_0px_15px_rgba(253,_186,_116,_0.8)]"
+          }  text-[25px] duration-100 outline-none`}
           maxLength={1}
           onFocus={(e) => {
             setTimeout(() => {
