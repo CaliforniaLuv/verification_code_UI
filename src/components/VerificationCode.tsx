@@ -9,9 +9,9 @@ export const VerificationCode = () => {
   const [code6, setCode6] = useState("");
   const [empty, setEmpty] = useState(false);
 
-  const formInput = (e: any) => {
-    const input = e.target;
-    const nextInput = input.nextElementSibling;
+  const formInput = (e: React.KeyboardEvent<HTMLFormElement>) => {
+    const input = e.target as HTMLFormElement;
+    const nextInput = input.nextElementSibling as HTMLFormElement;
 
     if (nextInput && input.value) {
       nextInput.focus();
@@ -30,16 +30,20 @@ export const VerificationCode = () => {
       code5 !== "" &&
       code6 !== ""
     ) {
-      console.log("합격");
       setEmpty(false);
     } else {
-      console.log("불합격");
       setEmpty(true);
     }
   };
 
-  function handleBackspace(e: any, func: (value: string) => void) {
-    const input = e.target;
+  function handleBackspace(
+    e: React.KeyboardEvent<HTMLInputElement>,
+    func: (value: string) => void
+  ) {
+    const input = e.currentTarget;
+
+    const nextInput = e.currentTarget
+      .previousElementSibling as HTMLInputElement;
 
     if (input.value || input.id === "input1") {
       input.value = "";
@@ -47,23 +51,27 @@ export const VerificationCode = () => {
       return;
     }
 
-    input.previousElementSibling.focus();
+    nextInput.focus();
   }
 
-  function handleArrowLeft(e: any) {
-    const previousInput = e.target.previousElementSibling;
+  function handleArrowLeft(e: React.KeyboardEvent<HTMLInputElement>) {
+    const previousInput = e.currentTarget
+      .previousElementSibling as HTMLInputElement;
     if (!previousInput) return;
     previousInput.focus();
   }
 
-  function handleArrowRight(e: any) {
-    const nextInput = e.target.nextElementSibling;
+  function handleArrowRight(e: React.KeyboardEvent<HTMLInputElement>) {
+    const nextInput = e.currentTarget.nextElementSibling as HTMLInputElement;
     if (!nextInput) return;
     nextInput.focus();
   }
 
-  const handleTyping = (e: any, func: (value: string) => void) => {
-    switch (e.keyCode) {
+  const handleTyping = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    func: (value: string) => void
+  ) => {
+    switch (e.key) {
       case KEYBOARDS.backspace:
         handleBackspace(e, func);
         break;
@@ -78,7 +86,10 @@ export const VerificationCode = () => {
   };
 
   return (
-    <form onInput={(e) => formInput(e)} onSubmit={(e) => e.preventDefault()}>
+    <form
+      onInput={(e: React.KeyboardEvent<HTMLFormElement>) => formInput(e)}
+      onSubmit={(e) => e.preventDefault()}
+    >
       <div className="flex gap-x-[10px]">
         <input
           id={"input1"}
@@ -94,7 +105,9 @@ export const VerificationCode = () => {
               e.target.select();
             }, 0);
           }}
-          onKeyDown={(e: any) => handleTyping(e, setCode1)}
+          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+            handleTyping(e, setCode1)
+          }
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setCode1(e.target.value)
           }
@@ -113,7 +126,9 @@ export const VerificationCode = () => {
               e.target.select();
             }, 0);
           }}
-          onKeyDown={(e: any) => handleTyping(e, setCode2)}
+          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+            handleTyping(e, setCode2)
+          }
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setCode2(e.target.value)
           }
@@ -132,7 +147,9 @@ export const VerificationCode = () => {
               e.target.select();
             }, 0);
           }}
-          onKeyDown={(e: any) => handleTyping(e, setCode3)}
+          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+            handleTyping(e, setCode3)
+          }
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setCode3(e.target.value)
           }
@@ -151,7 +168,9 @@ export const VerificationCode = () => {
               e.target.select();
             }, 0);
           }}
-          onKeyDown={(e: any) => handleTyping(e, setCode4)}
+          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+            handleTyping(e, setCode4)
+          }
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setCode4(e.target.value)
           }
@@ -170,7 +189,9 @@ export const VerificationCode = () => {
               e.target.select();
             }, 0);
           }}
-          onKeyDown={(e: any) => handleTyping(e, setCode5)}
+          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+            handleTyping(e, setCode5)
+          }
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setCode5(e.target.value)
           }
@@ -189,7 +210,9 @@ export const VerificationCode = () => {
               e.target.select();
             }, 0);
           }}
-          onKeyDown={(e: any) => handleTyping(e, setCode6)}
+          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+            handleTyping(e, setCode6)
+          }
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setCode6(e.target.value)
           }
@@ -208,7 +231,7 @@ export const VerificationCode = () => {
 };
 
 const KEYBOARDS = {
-  backspace: 8,
-  arrowLeft: 37,
-  arrowRight: 39,
+  backspace: "Backspace",
+  arrowLeft: "ArrowLeft",
+  arrowRight: "ArrowRight",
 };
